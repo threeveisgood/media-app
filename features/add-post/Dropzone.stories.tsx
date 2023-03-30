@@ -1,11 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Dropzone from "./Dropzone";
+import Dropzone from "../Dropzone";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 
 const meta: Meta<typeof Dropzone> = {
-  title: "Dropzone",
+  title: "design system/add post/Dropzone",
   component: Dropzone,
+  parameters: {
+    componentSubtitle:
+      "드래그 앤 드랍 또는 클릭해서 이미지나 비디오를 업로드하게 해주는 요소입니다.",
+  },
 };
 
 export default meta;

@@ -1,14 +1,35 @@
-import * as React from "react";
+import React, { memo, useCallback } from "react";
 
-interface InputProps {}
+interface InputProps {
+  placeholder: string;
+  name: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-const Input: React.FunctionComponent<InputProps> = (props) => {
-  return (
-    <input
-      className="text-3xl bg-transparent outline-0 px-5 py-8"
-      placeholder="제목을 입력하세요"
-    />
-  );
-};
+const Input: React.FunctionComponent<InputProps> = memo(
+  ({ placeholder, name, onChange }) => {
+    const handleChange = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (onChange) {
+          onChange(e);
+        }
+      },
+      [onChange]
+    );
+
+    return (
+      <input
+        type="text"
+        className="w-full text-3xl bg-transparent outline-0 px-5 py-8"
+        placeholder={placeholder}
+        onChange={handleChange}
+        data-testid="input"
+        name={name}
+      />
+    );
+  }
+);
+
+Input.displayName = "Input";
 
 export default Input;
