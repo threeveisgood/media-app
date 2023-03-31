@@ -1,9 +1,9 @@
 import * as React from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
+import { useSetRecoilState } from "recoil";
+import { postState } from "../../../atoms/post";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-
-interface IEditorProps {}
 
 const modules = {
   toolbar: [
@@ -14,16 +14,23 @@ const modules = {
   ],
 };
 
-const Editor: React.FunctionComponent<IEditorProps> = (props) => {
+const Editor: React.FunctionComponent = () => {
+  const set = useSetRecoilState(postState);
+
+  const handleChangeQuillBody = (text: string) => {
+    const propName = "body";
+    set((prev) => ({ ...prev, [propName]: text }));
+  };
+
   return (
-    <>
+    <div data-testid="quill">
       <ReactQuill
         theme="snow"
         modules={modules}
-        //onChange={handleChangeQuillBody}
+        onChange={handleChangeQuillBody}
         //defaultValue={originalPostId != "" ? body : ``}
       />
-    </>
+    </div>
   );
 };
 

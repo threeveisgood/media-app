@@ -7,3 +7,22 @@
         @apply dark:bg-gray-800 bg-white
     }
 }
+
+@layer component {
+    .ql-toolbar .ql-stroke {        
+        @apply fill-none stroke-black dark:stroke-white !important;
+    }
+    
+    .ql-toolbar .ql-fill {
+        fill: #fff !important;
+        @apply fill-black dark:fill-white !important;
+    }
+    
+    .ql-toolbar .ql-picker {        
+        @apply text-black dark:text-white !important;
+    }
+
+    .ql-editor {
+        @apply text-base min-h-[250px] !important;
+    }
+}

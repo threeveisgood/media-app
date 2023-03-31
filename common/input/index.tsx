@@ -20,7 +20,7 @@ const Input: React.FunctionComponent<InputProps> = memo(
     return (
       <input
         type="text"
-        className="w-full text-3xl bg-transparent outline-0 px-5 py-8"
+        className="w-full text-3xl bg-transparent outline-0 py-8"
         placeholder={placeholder}
         onChange={handleChange}
         data-testid="input"

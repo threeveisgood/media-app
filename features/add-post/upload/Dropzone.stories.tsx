@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Dropzone from "../Dropzone";
+import Dropzone from "./Dropzone";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 

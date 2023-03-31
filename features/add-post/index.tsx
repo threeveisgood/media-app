@@ -1,9 +1,9 @@
 import * as React from "react";
-import Dropzone from "./Dropzone";
+import Dropzone from "./upload/Dropzone";
 import Input from "../../common/input";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { Post, postState } from "../../atoms/post";
-import Editor from "./Editor";
+import Editor from "./editor";
 
 interface IAddPostProps {}
 
@@ -28,7 +28,7 @@ const AddPost: React.FunctionComponent<IAddPostProps> = (props) => {
         />
       </div>
       <div className=" mt-12">
-        <Editor />
+        <Editor onChange={onChangeValue("body")} />
       </div>
       <div className=" mt-24">
         <Dropzone />
