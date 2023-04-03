@@ -72,7 +72,7 @@ const Dropzone: React.FunctionComponent = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="flex w-[650px] justify-center bg-slate-200 dark:bg-slate-900">
+      <div className="flex w-[650px] justify-center bg-slate-200 dark:bg-slate-700">
         <div
           data-testid="dropzoneRoot"
           className="cursor-pointer w-full flex justify-center py-10 dark:text-white"

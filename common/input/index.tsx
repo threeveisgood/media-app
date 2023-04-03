@@ -1,35 +1,29 @@
-import React, { memo, useCallback } from "react";
+import * as React from "react";
 
-interface InputProps {
-  placeholder: string;
-  name: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+interface IInputProps {
+  size: "sm" | "md" | "lg";
 }
 
-const Input: React.FunctionComponent<InputProps> = memo(
-  ({ placeholder, name, onChange }) => {
-    const handleChange = useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (onChange) {
-          onChange(e);
-        }
-      },
-      [onChange]
-    );
-
-    return (
-      <input
-        type="text"
-        className="w-full text-3xl bg-transparent outline-0 py-8"
-        placeholder={placeholder}
-        onChange={handleChange}
-        data-testid="input"
-        name={name}
-      />
-    );
+const getSizeClass = (size: "sm" | "md" | "lg") => {
+  switch (size) {
+    case "sm":
+      return "text-sm";
+    case "md":
+      return "text-md";
+    case "lg":
+      return "text-lg";
   }
-);
+};
 
-Input.displayName = "Input";
+const Input: React.FunctionComponent<IInputProps> = (props) => {
+  return (
+    <input
+      type="text"
+      className="inline-block text-sm bg-slate-200 dark:bg-slate-700 outline-0 py-1.5 px-2  rounded-sm"
+      //onChange={handleChange}
+      data-testid="input"
+    />
+  );
+};
 
 export default Input;
