@@ -5,11 +5,7 @@ interface ILabelProps {
 }
 
 const Label: React.FunctionComponent<ILabelProps> = ({ text }) => {
-  return (
-    <label className="pr-4 font-bold font-bold min-w-[8rem] inline-block">
-      {text}
-    </label>
-  );
+  return <label className="pb-2.5 font-bold block">{text}</label>;
 };
 
 export default Label;

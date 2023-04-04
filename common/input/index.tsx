@@ -1,26 +1,42 @@
-import * as React from "react";
+import { useMemo } from "react";
 
 interface IInputProps {
-  size: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg";
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onPaste?: (e: React.ClipboardEvent<HTMLInputElement>) => void;
 }
 
 const getSizeClass = (size: "sm" | "md" | "lg") => {
   switch (size) {
     case "sm":
-      return "text-sm";
+      return "w-52";
     case "md":
-      return "text-md";
+      return "w-72";
     case "lg":
-      return "text-lg";
+      return "w-96";
   }
 };
 
-const Input: React.FunctionComponent<IInputProps> = (props) => {
+const BASE_BUTTON_CLASSES =
+  "inline-block text-sm bg-slate-200 dark:bg-slate-700 h-9 outline-0 py-1.5 px-2.5 rounded-sm";
+
+const Input: React.FunctionComponent<IInputProps> = ({
+  size = "md",
+  onChange,
+  onPaste,
+}) => {
+  const computedClasses = useMemo(() => {
+    const sizeClass = getSizeClass(size);
+
+    return sizeClass;
+  }, [size]);
+
   return (
     <input
       type="text"
-      className="inline-block text-sm bg-slate-200 dark:bg-slate-700 outline-0 py-1.5 px-2  rounded-sm"
-      //onChange={handleChange}
+      className={`${BASE_BUTTON_CLASSES} ${computedClasses}`}
+      onChange={onChange}
+      onPaste={onPaste}
       data-testid="input"
     />
   );
