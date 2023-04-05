@@ -43,7 +43,7 @@ const AddPost: React.FunctionComponent<IAddPostProps> = (props) => {
           onPaste={onPasteValue("title")}
         />
       </div>
-      <div className="mt-6">
+      <div className="mt-5">
         <Label text="상품 종류" />
         <Select data={categories} onChange={onChangeValue("category")} />
       </div>
@@ -79,10 +79,10 @@ const AddPost: React.FunctionComponent<IAddPostProps> = (props) => {
           onPaste={onPasteValue("productURL")}
         />
       </div>
-      <div className=" mt-12">
+      <div className=" mt-8">
         <Editor />
       </div>
-      <div className=" mt-24">
+      <div className=" mt-8">
         <Dropzone />
       </div>
     </div>

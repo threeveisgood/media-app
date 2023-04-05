@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { BiImageAdd } from "react-icons/bi";
 
 interface Formats {
   thumbnail: {
@@ -72,7 +73,7 @@ const Dropzone: React.FunctionComponent = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="flex w-[650px] justify-center bg-slate-200 dark:bg-slate-700">
+      <div className="flex w-full rounded-md justify-center bg-slate-100 dark:bg-slate-800">
         <div
           data-testid="dropzoneRoot"
           className="cursor-pointer w-full flex justify-center py-10 dark:text-white"
@@ -82,7 +83,12 @@ const Dropzone: React.FunctionComponent = () => {
           {isDragActive ? (
             <p>여기에 파일을 드랍해주세요...</p>
           ) : (
-            <p> 이미지를 드랍하거나 클릭해주세요</p>
+            <div className="flex flex-col items-center">
+              <div className="text-3xl">
+                <BiImageAdd />
+              </div>
+              <p>이미지를 드랍하거나 여기를 클릭해주세요</p>
+            </div>
           )}
           <div>
             {fileUrls.map((file: any) => (

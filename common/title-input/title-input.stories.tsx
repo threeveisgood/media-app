@@ -28,6 +28,15 @@ const meta: Meta<typeof titleInput> = {
         },
       },
     },
+    onPaste: {
+      description: "title에 텍스트를 붙혀넣기 할 때 실행되는 함수입니다.",
+      table: {
+        type: { summary: "function" },
+        defaultValue: {
+          summary: "(e: React.ClipboardEvent<HTMLInputElement>) => void",
+        },
+      },
+    },
   },
 };
 

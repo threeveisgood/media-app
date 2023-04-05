@@ -9,4 +9,5 @@ export const categories = [
   "도서",
   "상품권",
   "생활용품",
+  "기타",
 ];
