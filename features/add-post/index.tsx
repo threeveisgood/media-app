@@ -79,10 +79,10 @@ const AddPost: React.FunctionComponent<IAddPostProps> = (props) => {
           onPaste={onPasteValue("productURL")}
         />
       </div>
-      <div className=" mt-8">
+      <div className="mt-10">
         <Editor />
       </div>
-      <div className=" mt-8">
+      <div className="mt-8">
         <Dropzone />
       </div>
     </div>

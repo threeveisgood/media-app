@@ -17,7 +17,7 @@ const getSizeClass = (size: "sm" | "md" | "lg") => {
   }
 };
 
-const BASE_BUTTON_CLASSES =
+const BASE_INPUT_CLASSES =
   "inline-block text-sm bg-slate-200 dark:bg-slate-700 h-9 outline-0 py-1.5 px-2.5 rounded-sm";
 
 const Input: React.FunctionComponent<IInputProps> = ({
@@ -34,7 +34,7 @@ const Input: React.FunctionComponent<IInputProps> = ({
   return (
     <input
       type="text"
-      className={`${BASE_BUTTON_CLASSES} ${computedClasses}`}
+      className={`${BASE_INPUT_CLASSES} ${computedClasses}`}
       onChange={onChange}
       onPaste={onPaste}
       data-testid="input"

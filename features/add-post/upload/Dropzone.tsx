@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { BiImageAdd } from "react-icons/bi";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import useDropzoneUpload from "./Dropzone.query";
 
 interface Formats {
   thumbnail: {
@@ -38,30 +40,29 @@ interface FileData {
 }
 
 const Dropzone: React.FunctionComponent = () => {
+  const [thumb, setThumb] = useState<string[]>([]);
   let fileUrls: string[] = [];
+  const { mutate } = useDropzoneUpload();
 
-  const onDrop = (accpedtedFiles: File[]) => {
+  const onDrop = useCallback(async (accpedtedFiles: File[]) => {
     const formData = new FormData();
+    const config = {
+      headers: { "content-type": "multipart/form-data" },
+    };
 
     for (const file of accpedtedFiles) {
       formData.append("files", file);
-      console.log(file);
     }
 
-    // axios
-    //   .post("http://localhost:1337/api/upload", formData, {
-    //     headers: { "Content-Type": "multipart/form-data" },
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     res.data.map((link: FileData) => {
-    //       fileUrls.push(link.url);
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-  };
+    mutate(
+      { formData, config },
+      {
+        onSuccess: (data) => {
+          console.log(data);
+        },
+      }
+    );
+  }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
