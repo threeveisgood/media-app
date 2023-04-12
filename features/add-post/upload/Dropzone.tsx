@@ -1,67 +1,44 @@
-import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { BiImageAdd } from "react-icons/bi";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import useDropzoneUpload from "./Dropzone.query";
-
-interface Formats {
-  thumbnail: {
-    ext: string;
-    hash: string;
-    height: number;
-    mime: string;
-    name: string;
-    path: null;
-    size: number;
-    url: string;
-    width: number;
-  };
-}
-
-interface FileData {
-  aleternativeText: null;
-  caption: null;
-  createdAt: Date;
-  ext: string;
-  formats: Formats;
-  hash: string;
-  height: number;
-  id: number;
-  mime: string;
-  name: string;
-  previewUrl: null;
-  provider: string;
-  provider_metadata: null;
-  size: number;
-  updatedAt: Date;
-  url: string;
-  width: number;
-}
+import { postState } from "../../../atoms/post";
+import { FileData, UploadedFile } from "../../../types/file-upload";
 
 const Dropzone: React.FunctionComponent = () => {
+  const [fileUrls, setFileUrls] = useState<string[]>([]);
+  const [UploadFileInformation, setUploadFileInformation] = useState<
+    UploadedFile[]
+  >([]);
   const [thumb, setThumb] = useState<string[]>([]);
-  let fileUrls: string[] = [];
+  const [postValue, setPostValue] = useRecoilState(postState);
   const { mutate } = useDropzoneUpload();
 
   const onDrop = useCallback(async (accpedtedFiles: File[]) => {
     const formData = new FormData();
-    const config = {
-      headers: { "content-type": "multipart/form-data" },
-    };
 
     for (const file of accpedtedFiles) {
       formData.append("files", file);
     }
 
-    mutate(
-      { formData, config },
-      {
-        onSuccess: (data) => {
-          console.log(data);
-        },
-      }
-    );
+    mutate(formData, {
+      onSuccess: (data) => {
+        console.log(data);
+        const urls = data.map((file: FileData) => file.url);
+        const fileInformation = data.map((file: FileData) => ({
+          id: file.id,
+          thumbnailUrl: file.formats.thumbnail.url,
+        }));
+
+        setUploadFileInformation((prev) => [...prev, ...fileInformation]);
+        setPostValue((prev) => ({
+          ...prev,
+          imageLinks: [...prev.imageLinks, ...urls],
+        }));
+        console.log(postValue);
+      },
+    });
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
